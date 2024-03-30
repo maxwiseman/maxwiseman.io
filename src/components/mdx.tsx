@@ -219,7 +219,12 @@ export function Mdx(props: {
   code: string;
   globals?: Record<string, unknown> | undefined;
 }) {
-  const Component = useMDXComponent(props.code, props.globals);
+  const codePrefix = `
+if (typeof process === 'undefined') {
+  globalThis.process = { env: {} }
+}
+`
+  const Component = useMDXComponent(codePrefix + props.code, props.globals);
 
   return (
     <div className="mdx">
