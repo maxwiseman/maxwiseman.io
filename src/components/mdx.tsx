@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -61,11 +63,13 @@ const components = {
     />
   ),
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
-    <a
+    <Link
       className={cn(
         "font-medium underline decoration-muted-foreground underline-offset-4 transition-colors hover:decoration-foreground",
         className,
       )}
+      href={"#"}
+      target="_blank"
       {...props}
     />
   ),
@@ -155,6 +159,7 @@ const components = {
     />
   ),
   Image,
+  Button,
 };
 
 export function Mdx(props: {
