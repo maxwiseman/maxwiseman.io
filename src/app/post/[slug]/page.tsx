@@ -17,6 +17,8 @@ export default async function Page({
   // Find the post for the current page.
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
 
+  console.log(allPosts.map((singlePost) => (singlePost._raw.flattenedPath)));
+
   // 404 if the post does not exist.
   if (!post) notFound();
 

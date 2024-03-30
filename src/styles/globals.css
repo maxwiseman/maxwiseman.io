@@ -81,3 +81,17 @@
     @apply px-4;
   }
 }
+
+h1 > .subheading-anchor::before, h2 > .subheading-anchor::before, h3 > .subheading-anchor::before, h4 > .subheading-anchor::before, h5 > .subheading-anchor::before, h6 > .subheading-anchor::before {
+  color: transparent;
+  width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-left: -40px;
+    margin-right: 10px;
+    content: "# ";
+    @apply transition-colors;
+}
+h1:hover > .subheading-anchor::before, h2:hover > .subheading-anchor::before, h3:hover > .subheading-anchor::before, h4:hover > .subheading-anchor::before, h5:hover > .subheading-anchor::before, h6:hover > .subheading-anchor::before {
+  color: hsl(var(--muted-foreground));
+}

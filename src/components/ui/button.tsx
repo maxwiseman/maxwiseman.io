@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
+import Link from "next/link";
+import { Spinner } from "./spinner";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:border disabled:border-input disabled:bg-secondary disabled:text-muted-foreground disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -38,20 +39,118 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
+  icon?: React.ReactElement;
+}
+
+export interface LinkButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  loading?: boolean;
+  icon?: React.ReactElement;
+  href: string;
+  target?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const StyledIcon = props.icon
+      ? React.cloneElement(props.icon, {
+          className: cn(
+            "h-4 overflow-hidden transition-[width]",
+            !props.loading ? "mr-2 w-4" : "mr-0 w-0",
+            { "mr-0": size === "icon" },
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
+            props.icon.props?.className as string | undefined,
+          ),
+        })
+      : null;
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+        disabled={props.disabled ?? props.loading}
+      >
+        <div
+          className={cn(
+            "overflow-hidden transition-[width]",
+            props.loading ? "mr-2 w-4" : "mr-0 w-0",
+            size === "icon" ? "mr-0" : "",
+          )}
+        >
+          <Spinner className={cn("h-4 w-4")} />
+        </div>
+        {props.icon ? (
+          <div
+            className={cn(
+              "overflow-hidden transition-[width]",
+              !props.loading ? "mr-2 w-4" : "mr-0 w-0",
+              size === "icon" ? "mr-0 w-auto" : "",
+            )}
+          >
+            {StyledIcon}
+          </div>
+        ) : null}
+        {props.children}
+      </Comp>
     );
   },
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+const LinkButton = React.forwardRef<HTMLButtonElement, LinkButtonProps>(
+  (
+    { href, target, className, variant, size, asChild = false, ...props },
+    ref,
+  ) => {
+    const Comp = asChild ? Slot : "button";
+    const StyledIcon = props.icon
+      ? React.cloneElement(props.icon, {
+          className: cn(
+            "h-4 w-4 mr-2",
+            { "mr-0": size === "icon" },
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
+            props.icon.props?.className as string | undefined,
+          ),
+        })
+      : null;
+    return (
+      <Link href={href} tabIndex={-1} target={target}>
+        <Comp
+          className={cn("w-full", buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+          disabled={props.disabled ?? props.loading}
+        >
+          <div
+            className={cn(
+              "overflow-hidden transition-[width]",
+              props.loading ? "mr-2 w-4" : "mr-0 w-0",
+              size === "icon" ? "mr-0" : "",
+            )}
+          >
+            <Spinner className={cn("h-4 w-4")} />
+          </div>
+          {props.icon ? (
+            <div
+              className={cn(
+                "overflow-hidden transition-[width]",
+                !props.loading ? "mr-2 w-4" : "mr-0 w-0",
+                size === "icon" ? "mr-0" : "",
+              )}
+            >
+              {!props.loading && StyledIcon}
+            </div>
+          ) : null}
+          {props.children}
+        </Comp>
+      </Link>
+    );
+  },
+);
+LinkButton.displayName = "LinkButton";
+
+export { Button, LinkButton, buttonVariants };

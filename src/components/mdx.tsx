@@ -1,11 +1,16 @@
+/* eslint-disable react-hooks/rules-of-hooks -- These are react functions, they just aren't named */
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import * as React from "react";
 import Image from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import { IconCheck, IconCopy } from "@tabler/icons-react";
+import Children from "react-children-utilities";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -62,14 +67,17 @@ const components = {
       {...props}
     />
   ),
-  a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
+  a: ({
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLAnchorElement> & { href?: string }) => (
     <Link
       className={cn(
         "font-medium underline decoration-muted-foreground underline-offset-4 transition-colors hover:decoration-foreground",
         className,
       )}
       href={"#"}
-      target="_blank"
+      target={props.href?.startsWith("http") ? "_blank" : undefined}
       {...props}
     />
   ),
@@ -140,10 +148,44 @@ const components = {
       {...props}
     />
   ),
-  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre
+  pre: ({
+    className,
+    children,
+    ...props
+  }: React.HTMLAttributes<HTMLPreElement>) => {
+    const text = Children.onlyText(children);
+    const [loading, setLoading] = React.useState(false);
+    const [finished, setFinished] = React.useState(false);
+
+    return (
+      <pre
+        className={cn(
+          "relative mb-4 mt-6 overflow-x-auto rounded-lg border bg-card px-2 py-4 has-[code]:bg-card [&>code]:border-none",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        <Button
+          size={"icon"}
+          variant={"outline"}
+          className="absolute right-0 top-0 m-2"
+          icon={finished ? <IconCheck /> : <IconCopy />}
+          onClick={async () => {
+            setLoading(true);
+            await navigator.clipboard.writeText(text);
+            setLoading(false);
+            setFinished(true);
+          }}
+          loading={loading}
+        />
+      </pre>
+    );
+  },
+  figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <figure
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-black py-4",
+        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-card pt-4 has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
         className,
       )}
       {...props}
@@ -158,8 +200,19 @@ const components = {
       {...props}
     />
   ),
+  mark: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <mark
+      className={cn(
+        {
+          "rounded-md bg-muted-foreground/40 p-1":
+            "data-highlighted-chars" in props,
+        },
+        className,
+      )}
+      {...props}
+    />
+  ),
   Image,
-  Button,
 };
 
 export function Mdx(props: {
