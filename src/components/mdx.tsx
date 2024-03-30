@@ -185,7 +185,7 @@ const components = {
   figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <figure
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-card has-[code]:bg-card [&>figcaption]:pt-4 [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
+        "mb-4 shadow mt-6 overflow-x-auto rounded-lg border bg-card has-[code]:bg-card [&>figcaption]:pt-4 [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
         className,
       )}
       {...props}
@@ -204,7 +204,7 @@ const components = {
     <mark
       className={cn(
         {
-          "rounded-md bg-muted-foreground/40 p-1":
+          "rounded-md bg-muted border-b-2 border-b-muted-foreground/30 p-1":
             "data-highlighted-chars" in props,
         },
         className,
