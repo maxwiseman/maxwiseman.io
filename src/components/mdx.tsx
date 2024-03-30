@@ -169,7 +169,7 @@ const components = {
         <Button
           size={"icon"}
           variant={"outline"}
-          className="absolute right-0 top-0 m-2"
+          className="absolute right-0 top-0 m-3"
           icon={finished ? <IconCheck /> : <IconCopy />}
           onClick={async () => {
             setLoading(true);
@@ -177,7 +177,7 @@ const components = {
             setLoading(false);
             setFinished(true);
           }}
-          loading={loading}
+          loading={loading ? true : undefined}
         />
       </pre>
     );
@@ -185,7 +185,7 @@ const components = {
   figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <figure
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-card pt-4 has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
+        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-card has-[code]:bg-card [&>figcaption]:pt-4 [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
         className,
       )}
       {...props}
@@ -194,7 +194,7 @@ const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <code
       className={cn(
-        "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        "relative rounded border px-1 py-1 font-mono text-sm",
         className,
       )}
       {...props}
@@ -219,6 +219,7 @@ export function Mdx(props: {
   code: string;
   globals?: Record<string, unknown> | undefined;
 }) {
+  // Some really weird workaround https://arc.net/l/quote/gtkqdsfg
   const codePrefix = `
 if (typeof process === 'undefined') {
   globalThis.process = { env: {} }
