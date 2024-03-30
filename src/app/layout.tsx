@@ -46,8 +46,8 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <main className="flex h-full justify-center border-t bg-muted/40 p-8 [&>*]:w-full [&>*]:max-w-prose">
-          {children}
+        <main className="flex h-full w-full justify-center border-t bg-muted/40 p-8">
+          <div className='w-full max-w-prose'>{children}</div>
         </main>
       </body>
     </html>
