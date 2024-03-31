@@ -20,7 +20,7 @@ export default function RootLayout({
     <html className="dark h-full" lang="en">
       <body className={`h-full font-sans ${GeistSans.variable}`}>
         <TooltipProvider>
-          <nav className="flex w-full justify-center">
+          <nav className="flex w-full justify-center px-8">
             <div className="flex h-16 w-full max-w-prose items-center justify-between">
               <Link
                 href="/"
