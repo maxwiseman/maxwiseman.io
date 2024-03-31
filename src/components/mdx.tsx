@@ -73,7 +73,7 @@ const components = {
   }: React.HTMLAttributes<HTMLAnchorElement> & { href?: string }) => (
     <Link
       className={cn(
-        "font-medium underline decoration-muted-foreground underline-offset-4 transition-colors hover:decoration-foreground",
+        "font-medium underline decoration-muted-foreground/50 underline-offset-4 transition-colors duration-300 hover:decoration-foreground",
         className,
       )}
       href={"#"}
@@ -88,13 +88,16 @@ const components = {
     />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+    <ul className={cn("my-6 ml-6", className)} {...props} />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className={cn("mt-2", className)} {...props} />
+    <li
+      className={cn("mt-2 marker:text-muted-foreground/50", className)}
+      {...props}
+    />
   ),
   blockquote: ({
     className,
@@ -160,7 +163,7 @@ const components = {
     return (
       <pre
         className={cn(
-          "relative mb-4 mt-6 overflow-x-auto rounded-lg border bg-card px-2 py-4 has-[code]:bg-card [&>code]:border-none",
+          "relative mb-4 mt-6 overflow-x-auto rounded-lg border bg-card has-[code]:bg-card [&>code]:border-none",
           className,
         )}
         {...props}
@@ -185,7 +188,7 @@ const components = {
   figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <figure
       className={cn(
-        "mb-4 shadow mt-6 overflow-x-auto rounded-lg border bg-card has-[code]:bg-card [&>figcaption]:pt-4 [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
+        "mb-4 mt-6 rounded-lg border bg-card shadow has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:pt-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
         className,
       )}
       {...props}
@@ -194,7 +197,7 @@ const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <code
       className={cn(
-        "relative rounded border px-1 py-1 font-mono text-sm",
+        "relative overflow-x-auto rounded border px-4 py-5 font-mono text-sm",
         className,
       )}
       {...props}
@@ -204,7 +207,8 @@ const components = {
     <mark
       className={cn(
         {
-          "rounded-md bg-muted border-b-2 border-b-muted-foreground/30 p-1":
+          // hover:top-[2px] hover:border-b-0
+          "relative top-0 rounded-md border-b-2 border-b-muted-foreground/30 bg-muted p-1 transition-[border,top] duration-75":
             "data-highlighted-chars" in props,
         },
         className,
@@ -224,7 +228,7 @@ export function Mdx(props: {
 if (typeof process === 'undefined') {
   globalThis.process = { env: {} }
 }
-`
+`;
   const Component = useMDXComponent(codePrefix + props.code, props.globals);
 
   return (

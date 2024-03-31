@@ -10,6 +10,14 @@ import { Button } from '../../components/ui/button'
 
 https://google.com
 
+- Make an mdx file
+  - Add some content
+- Add some content
+
+1. Do something
+    1. Do something else
+2. Do something else
+
 export const MyDynamicButton = () => {
   const [count, setCount] = useState(0);
   return (
@@ -20,7 +28,7 @@ export const MyDynamicButton = () => {
 <div className='my-4'><Button variant='outline'>Test Hello</Button></div>
 <MyDynamicButton />
 
-```ts showLineNumbers  "input" title="index.js"
+```ts showLineNumbers  "input" title="app/index.ts"
 export default function test(input: string): string {
   return input
 }

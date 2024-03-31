@@ -70,7 +70,7 @@
   }
 
   .step:before {
-    @apply bg-muted border-background absolute inline-flex h-9 w-9 items-center justify-center rounded-full border-4 text-center -indent-px font-mono text-base font-medium;
+    @apply absolute inline-flex h-9 w-9 items-center justify-center rounded-full border-4 border-background bg-muted text-center -indent-px font-mono text-base font-medium;
     @apply ml-[-50px] mt-[-4px];
     content: counter(step);
   }
@@ -82,16 +82,44 @@
   }
 }
 
-h1 > .subheading-anchor::before, h2 > .subheading-anchor::before, h3 > .subheading-anchor::before, h4 > .subheading-anchor::before, h5 > .subheading-anchor::before, h6 > .subheading-anchor::before {
+h1 > .subheading-anchor::before,
+h2 > .subheading-anchor::before,
+h3 > .subheading-anchor::before,
+h4 > .subheading-anchor::before,
+h5 > .subheading-anchor::before,
+h6 > .subheading-anchor::before {
   color: transparent;
   width: 40px;
-    height: 30px;
-    display: inline-block;
-    margin-left: -40px;
-    padding-right: 10px;
-    content: "# ";
-    @apply transition-colors;
+  height: 30px;
+  display: inline-block;
+  margin-left: -40px;
+  padding-right: 10px;
+  opacity: 50%;
+  content: "# ";
+  @apply transition-colors duration-200;
 }
-h1:hover > .subheading-anchor::before, h2:hover > .subheading-anchor::before, h3:hover > .subheading-anchor::before, h4:hover > .subheading-anchor::before, h5:hover > .subheading-anchor::before, h6:hover > .subheading-anchor::before {
+h1:hover > .subheading-anchor::before,
+h2:hover > .subheading-anchor::before,
+h3:hover > .subheading-anchor::before,
+h4:hover > .subheading-anchor::before,
+h5:hover > .subheading-anchor::before,
+h6:hover > .subheading-anchor::before {
   color: hsl(var(--muted-foreground));
+}
+
+ul > li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  width: min-content;
+  height: 100%;
+  color: hsl(var(--muted-foreground));
+  opacity: 50%;
+  margin-left: -8px;
+  list-style-type: none;
+  transform: translateX(-100%);
+}
+
+li {
+  position: relative;
 }
