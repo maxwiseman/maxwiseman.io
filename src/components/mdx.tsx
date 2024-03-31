@@ -11,6 +11,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { IconCheck, IconCopy } from "@tabler/icons-react";
 import Children from "react-children-utilities";
+import { LinkEmbed } from "./link-embed";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -217,6 +218,7 @@ const components = {
     />
   ),
   Image,
+  LinkEmbed,
 };
 
 export function Mdx(props: {
