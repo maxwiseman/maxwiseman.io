@@ -123,3 +123,7 @@ ul > li::before {
 li {
   position: relative;
 }
+
+* {
+  text-decoration-color: hsl(var(--muted-foreground) / 50%);
+}
