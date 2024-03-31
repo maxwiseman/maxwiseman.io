@@ -2,11 +2,11 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import rehypePrettyCode, { type Options } from 'rehype-pretty-code';
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: "posts/**/*.mdx",
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
@@ -15,21 +15,67 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: "string",
-      resolve: (post) => `/posts/${post._raw.flattenedPath}`,
+      resolve: (post) => `/${post._raw.flattenedPath}`,
+    },
+  },
+}));
+export const Project = defineDocumentType(() => ({
+  name: "Project",
+  filePathPattern: "projects/**/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    repo: { type: "string", required: true },
+    tech: {
+      type: "list",
+      required: true,
+      of: {
+        type: "enum",
+        options: [
+          "react",
+          "next",
+          "cloudflare",
+          "drizzle",
+          "tailwind",
+          "vercel",
+          "shadcn",
+          "turso",
+        ],
+      },
+    },
+  },
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (project) => `/${project._raw.flattenedPath}`,
     },
   },
 }));
 
 export default makeSource({
-  contentDirPath: "src/content/posts",
-  documentTypes: [Post],
+  contentDirPath: "src/content",
+  documentTypes: [Post, Project],
   mdx: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
-      properties: {
-        className: ['subheading-anchor'],
-        ariaLabel: 'Link to section'
-      }
-    }], [rehypePrettyCode as (options: Options) => undefined, { theme: 'github-dark', keepBackground: false, defaultLang: "plaintext" }]],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ["subheading-anchor"],
+            ariaLabel: "Link to section",
+          },
+        },
+      ],
+      [
+        rehypePrettyCode as (options: Options) => undefined,
+        {
+          theme: "github-dark",
+          keepBackground: false,
+          defaultLang: "plaintext",
+        },
+      ],
+    ],
   },
 });

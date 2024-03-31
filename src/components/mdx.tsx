@@ -163,7 +163,7 @@ const components = {
     return (
       <pre
         className={cn(
-          "relative mb-4 mt-6 overflow-x-auto rounded-lg border bg-card has-[code]:bg-card [&>code]:border-none",
+          "relative mb-4 mt-6 overflow-x-auto rounded-xl border bg-card has-[code]:bg-card [&>code]:border-none",
           className,
         )}
         {...props}
@@ -188,7 +188,7 @@ const components = {
   figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <figure
       className={cn(
-        "mb-4 mt-6 rounded-lg border bg-card shadow has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:pt-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
+        "mb-4 mt-6 rounded-xl border bg-card shadow has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:pt-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
         className,
       )}
       {...props}
@@ -197,7 +197,7 @@ const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <code
       className={cn(
-        "relative overflow-x-auto rounded border px-4 py-5 font-mono text-sm",
+        "relative overflow-x-auto rounded-xl border px-4 py-5 font-mono text-sm",
         className,
       )}
       {...props}

@@ -5,19 +5,20 @@ import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
-    slug: post._raw.flattenedPath,
+    slug: post._raw.flattenedPath.split("/"),
   }));
 }
 
 export default async function Page({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string[] };
 }): Promise<React.ReactElement> {
   // Find the post for the current page.
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
-
-  console.log(allPosts.map((singlePost) => singlePost._raw.flattenedPath));
+  const post = allPosts.find(
+    (post) =>
+      post._raw.flattenedPath.replace("posts/", "") === params.slug.join("/"),
+  );
 
   // 404 if the post does not exist.
   if (!post) notFound();
