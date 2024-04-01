@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import "@/styles/globals.css";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { GeistSans } from "geist/font/sans";
@@ -29,26 +34,31 @@ export default function RootLayout({
             <div className="flex w-full max-w-prose items-center justify-between">
               <div>
                 <Link
-                  className="underline decoration-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground"
+                  className="underline underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground"
                   href={"https://github.com/maxwiseman"}
                 >
                   Max Wiseman
                 </Link>
               </div>
               <div>
-                <Link
-                  href={`https://github.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`}
-                  target="_blank"
-                  aria-label="View the source code on GitHub"
-                >
-                  <Button
-                    variant={"outline"}
-                    size={"icon"}
-                    aria-label="View the source code on GitHub"
-                  >
-                    <IconBrandGithub className="h-4 w-4" />
-                  </Button>
-                </Link>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Link
+                      href={`https://github.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`}
+                      target="_blank"
+                      aria-label="View the source code on GitHub"
+                    >
+                      <Button
+                        variant={"outline"}
+                        size={"icon"}
+                        aria-label="View the source code on GitHub"
+                      >
+                        <IconBrandGithub className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>View source on GitHub</TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </footer>
