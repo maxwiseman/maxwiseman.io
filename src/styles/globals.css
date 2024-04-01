@@ -114,7 +114,7 @@ ul > li::before {
   width: min-content;
   height: 100%;
   color: hsl(var(--muted-foreground));
-  opacity: 50%;
+  opacity: 40%;
   margin-left: -8px;
   list-style-type: none;
   transform: translateX(-100%);

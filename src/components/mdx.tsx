@@ -102,7 +102,7 @@ const mdxComponents = {
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
     <li
       className={cn(
-        "mt-2 text-muted-foreground marker:text-muted-foreground/50",
+        "mt-2 text-muted-foreground marker:text-muted-foreground/40",
         className,
       )}
       {...props}
@@ -198,7 +198,7 @@ const mdxComponents = {
   figure: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <figure
       className={cn(
-        "mb-4 mt-6 rounded-xl border bg-card shadow has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:pb-4 [&>figcaption]:pl-3 [&>figcaption]:pt-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
+        "mb-4 mt-6 rounded-xl border bg-card shadow has-[code]:bg-card [&>figcaption]:border-b [&>figcaption]:py-4 [&>figcaption]:pl-4 [&>figcaption]:font-mono [&>figcaption]:text-sm [&>figcaption]:text-muted-foreground [&>pre]:!m-0 [&>pre]:border-none",
         className,
       )}
       {...props}
@@ -207,7 +207,7 @@ const mdxComponents = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <code
       className={cn(
-        "relative overflow-x-auto rounded-xl border px-4 py-5 font-mono text-sm",
+        "relative overflow-x-auto rounded-xl border py-4 font-mono text-sm leading-[2] [&>[data-highlighted-line]]:bg-muted/50 [&>[data-line]]:px-4",
         className,
       )}
       {...props}
