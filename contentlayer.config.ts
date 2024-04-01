@@ -4,6 +4,11 @@ import remarkGfm from "remark-gfm";
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 
+export const Misc = defineDocumentType(() => ({
+  name: "Misc",
+  filePathPattern: "misc/**/*.mdx",
+  contentType: "mdx",
+}));
 export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: "posts/**/*.mdx",
@@ -56,7 +61,7 @@ export const Project = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "src/content",
-  documentTypes: [Post, Project],
+  documentTypes: [Post, Project, Misc],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

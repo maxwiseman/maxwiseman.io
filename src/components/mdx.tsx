@@ -12,8 +12,10 @@ import { Button } from "./ui/button";
 import { IconCheck, IconCopy } from "@tabler/icons-react";
 import Children from "react-children-utilities";
 import { LinkEmbed } from "./link-embed";
+import { ProjectList } from "./project-list";
+import { PostList } from "./post-list";
 
-const components = {
+const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
@@ -84,7 +86,10 @@ const components = {
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+      className={cn(
+        "leading-7 text-muted-foreground [&:not(:first-child)]:mt-6",
+        className,
+      )}
       {...props}
     />
   ),
@@ -96,7 +101,10 @@ const components = {
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
     <li
-      className={cn("mt-2 marker:text-muted-foreground/50", className)}
+      className={cn(
+        "mt-2 text-muted-foreground marker:text-muted-foreground/50",
+        className,
+      )}
       {...props}
     />
   ),
@@ -180,6 +188,7 @@ const components = {
             await navigator.clipboard.writeText(text);
             setLoading(false);
             setFinished(true);
+            setTimeout(() => setFinished(false), 3000);
           }}
           loading={loading ? true : undefined}
         />
@@ -219,6 +228,8 @@ const components = {
   ),
   Image,
   LinkEmbed,
+  ProjectList,
+  PostList,
 };
 
 export function Mdx(props: {
@@ -235,7 +246,7 @@ if (typeof process === 'undefined') {
 
   return (
     <div className="mdx">
-      <Component components={components} />
+      <Component components={mdxComponents} />
     </div>
   );
 }

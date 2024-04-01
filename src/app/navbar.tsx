@@ -24,10 +24,10 @@ export function Navbar() {
             Home
           </Link>
           <Link
-            href="/"
+            href="/posts"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            About
+            Posts
           </Link>
           <Link
             href="/"

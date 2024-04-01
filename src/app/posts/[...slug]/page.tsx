@@ -25,6 +25,16 @@ export default async function Page({
 
   return (
     <div>
+      <h1 className="mt-2 scroll-m-20 text-5xl font-bold tracking-tight">
+        {post.title}
+      </h1>
+      <h3 className="mb-10 mt-4 text-3xl font-semibold text-muted-foreground">
+        {new Date(post.date).toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </h3>
       <Mdx code={post.body.code} />
     </div>
   );
