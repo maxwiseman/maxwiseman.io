@@ -8,8 +8,8 @@ export function ProjectList() {
       {allProjects.map((project) => (
         <Link key={project._id} href={project.url}>
           <Card className="p-4">
-            <h6 className="font-bold">{project.title}</h6>
-            <p className="text-muted-foreground">{project.repo}</p>
+            <h6 className="line-clamp-1 font-bold">{project.title}</h6>
+            <p className="line-clamp-1 text-muted-foreground">{project.repo}</p>
           </Card>
         </Link>
       ))}

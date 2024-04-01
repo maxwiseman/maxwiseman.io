@@ -42,12 +42,12 @@ export default function RootLayout({
               </div>
               <div>
                 <Tooltip>
-                  <TooltipTrigger>
-                    <Link
-                      href={`https://github.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`}
-                      target="_blank"
-                      aria-label="View the source code on GitHub"
-                    >
+                  <Link
+                    href={`https://github.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`}
+                    target="_blank"
+                    aria-label="View the source code on GitHub"
+                  >
+                    <TooltipTrigger asChild>
                       <Button
                         variant={"outline"}
                         size={"icon"}
@@ -55,9 +55,9 @@ export default function RootLayout({
                       >
                         <IconBrandGithub className="h-4 w-4" />
                       </Button>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>View source on GitHub</TooltipContent>
+                    </TooltipTrigger>
+                  </Link>
+                  <TooltipContent>View source</TooltipContent>
                 </Tooltip>
               </div>
             </div>

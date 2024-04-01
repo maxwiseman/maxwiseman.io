@@ -20,8 +20,8 @@ export function PostList() {
             return (
               <Link key={post._id} href={post.url}>
                 <Card className="p-4">
-                  <h6 className="font-bold">{post.title}</h6>
-                  <p className="text-muted-foreground">
+                  <h6 className="line-clamp-1 font-bold">{post.title}</h6>
+                  <p className="line-clamp-1 text-muted-foreground">
                     {new Date(post.date).toLocaleDateString(undefined, {
                       year: "numeric",
                       month: "long",
@@ -34,8 +34,8 @@ export function PostList() {
           if (i === 3)
             return (
               <Card key={post._id} className="cursor-default p-4">
-                <h6 className="font-bold">{post.title}</h6>
-                <p className="text-muted-foreground">
+                <h6 className="line-clamp-1 font-bold">{post.title}</h6>
+                <p className="line-clamp-1 text-muted-foreground">
                   {new Date(post.date).toLocaleDateString(undefined, {
                     year: "numeric",
                     month: "long",
