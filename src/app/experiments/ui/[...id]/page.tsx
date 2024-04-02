@@ -10,6 +10,28 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+import { type Metadata } from "next";
+
+export function generateMetadata({
+  params,
+}: {
+  params: { id: string[] };
+}): Metadata {
+  const component = components.find(
+    (component) => component.id === params.id.join("/"),
+  );
+
+  return {
+    title: `${component?.title} Component - Max Wiseman`,
+    description: component?.description,
+  };
+}
+
+export function generateStaticParams() {
+  return components.map((component) => ({
+    id: component.id.split("/"),
+  }));
+}
 
 export default async function Page({ params }: { params: { id: string[] } }) {
   const component = components.find(

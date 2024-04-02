@@ -9,6 +9,12 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "UI Components - Max Wiseman",
+  description: "UI Components",
+};
 
 export default function Page(): React.ReactElement {
   return (
