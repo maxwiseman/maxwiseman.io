@@ -30,7 +30,7 @@ export function Navbar() {
             Posts
           </Link>
           <Link
-            href="/"
+            href="/experiments"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Experiments

@@ -16,7 +16,7 @@ export function PostList() {
         }}
       >
         {allPosts.map((post, i) => {
-          if (i < 3)
+          if (i < 3 && post.published)
             return (
               <Link key={post._id} href={post.url}>
                 <Card className="p-4">
@@ -31,7 +31,7 @@ export function PostList() {
                 </Card>
               </Link>
             );
-          if (i === 3)
+          if (i === 3 && post.published)
             return (
               <Card key={post._id} className="cursor-default p-4">
                 <h6 className="line-clamp-1 font-bold">{post.title}</h6>

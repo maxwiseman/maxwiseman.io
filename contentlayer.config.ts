@@ -9,6 +9,7 @@ export const Misc = defineDocumentType(() => ({
   filePathPattern: "misc/**/*.mdx",
   contentType: "mdx",
 }));
+
 export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: "posts/**/*.mdx",
@@ -25,6 +26,7 @@ export const Post = defineDocumentType(() => ({
     },
   },
 }));
+
 export const Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: "projects/**/*.mdx",

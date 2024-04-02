@@ -9,7 +9,6 @@ import "@/styles/globals.css";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
-import { Navbar } from "./navbar";
 
 export const metadata = {
   title: "Max Wiseman",
@@ -26,10 +25,7 @@ export default function RootLayout({
     <html className="dark h-full" lang="en">
       <body className={`h-full font-sans ${GeistSans.variable}`}>
         <TooltipProvider>
-          <Navbar />
-          <main className="flex min-h-[calc(100%-4rem)] w-full justify-center border-y bg-muted/40 p-8">
-            <div className="w-full max-w-prose">{children}</div>
-          </main>
+          {children}
           <footer className="flex items-center justify-center p-8 text-muted-foreground">
             <div className="flex w-full max-w-prose items-center justify-between">
               <div>
