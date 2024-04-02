@@ -6,7 +6,7 @@ export const allExperiments: {
 }[] = [
   {
     title: "VFR Navigation Log",
-    date: new Date("2021-08-01"),
+    date: new Date("April 1 2024"),
     url: "/experiments/vfr-navigation-log",
   },
 ];
