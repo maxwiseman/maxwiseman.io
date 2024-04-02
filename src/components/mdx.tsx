@@ -8,12 +8,11 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { IconCheck, IconCopy } from "@tabler/icons-react";
 import Children from "react-children-utilities";
 import { LinkEmbed } from "./link-embed";
 import { ProjectList } from "./project-list";
 import { PostList } from "./post-list";
+import { ClipboardButton } from "./clipboard-button";
 
 const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -166,8 +165,6 @@ const mdxComponents = {
     ...props
   }: React.HTMLAttributes<HTMLPreElement>) => {
     const text = Children.onlyText(children);
-    const [loading, setLoading] = React.useState(false);
-    const [finished, setFinished] = React.useState(false);
 
     return (
       <pre
@@ -178,20 +175,7 @@ const mdxComponents = {
         {...props}
       >
         {children}
-        <Button
-          size={"icon"}
-          variant={"outline"}
-          className="absolute right-0 top-0 m-3"
-          icon={finished ? <IconCheck /> : <IconCopy />}
-          onClick={async () => {
-            setLoading(true);
-            await navigator.clipboard.writeText(text);
-            setLoading(false);
-            setFinished(true);
-            setTimeout(() => setFinished(false), 3000);
-          }}
-          loading={loading ? true : undefined}
-        />
+        <ClipboardButton className="absolute right-0 top-0 m-3" text={text} />
       </pre>
     );
   },

@@ -80,7 +80,10 @@ export default makeSource({
       [
         rehypePrettyCode as (options: Options) => undefined,
         {
-          theme: "github-dark",
+          themes: {
+            light: "github-light",
+            dark: "github-dark",
+          },
           keepBackground: false,
           defaultLang: "plaintext",
         },

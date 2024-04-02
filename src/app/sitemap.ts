@@ -4,7 +4,7 @@ import { allExperiments } from "./experiments/experiments";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const recentPost = allPosts.sort(
-    (a, b) => new Date(a.date).getUTCDate() - new Date(b.date).getUTCDate(),
+    (a, b) => new Date(b.date).getUTCDate() - new Date(a.date).getUTCDate(),
   )[0];
 
   return [

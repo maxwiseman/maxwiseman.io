@@ -9,4 +9,9 @@ export const allExperiments: {
     date: new Date("April 1 2024"),
     url: "/experiments/vfr-navigation-log",
   },
+  {
+    title: "UI Components",
+    date: new Date("April 2 2024"),
+    url: "/experiments/ui",
+  },
 ];
