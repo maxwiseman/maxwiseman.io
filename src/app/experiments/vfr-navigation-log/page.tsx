@@ -109,8 +109,7 @@ export default function Page(): React.ReactElement {
         <tr>
           <td contentEditable rowSpan={2}></td>
           <td contentEditable></td>
-          <td contentEditable></td>
-          <td contentEditable></td>
+          <td contentEditable colSpan={2}></td>
           <td contentEditable></td>
           <td contentEditable></td>
           <td contentEditable></td>
