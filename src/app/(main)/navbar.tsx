@@ -6,15 +6,16 @@ export function Navbar() {
       <div className="flex h-16 w-full max-w-prose items-center justify-between">
         <Link
           href="/"
-          className="text-md hidden font-bold text-foreground transition-opacity hover:opacity-80 sm:block md:text-lg"
+          className="text-md flex font-bold text-foreground transition-opacity hover:opacity-80 md:text-lg"
         >
-          Max Wiseman
-        </Link>
-        <Link
-          href="/"
-          className="text-md font-bold text-foreground transition-opacity hover:opacity-80 sm:hidden md:text-lg"
-        >
-          MW
+          M
+          <span className="inline-block w-0 origin-left scale-x-0 transition-[width,transform] sm:w-full sm:scale-x-100">
+            ax{" "}
+          </span>
+          <div className="transition-[min-width] sm:min-w-[0.5ch]" />W
+          <span className="inline-block w-0 shrink-0 origin-left scale-x-0 transition-[width,transform] sm:w-full sm:scale-x-100">
+            iseman
+          </span>
         </Link>
         <div className="flex gap-4">
           <Link
