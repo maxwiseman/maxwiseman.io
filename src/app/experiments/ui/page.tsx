@@ -52,7 +52,7 @@ export default function Page(): React.ReactElement {
         </Link>{" "}
         with minor alterations
       </h3>
-      <div className="grid w-full grid-cols-2 gap-8 py-8 md:grid-cols-3">
+      <div className="grid w-full grid-flow-row-dense grid-cols-2 gap-8 py-8 md:grid-cols-3">
         {components.map((component) => (
           <MiniExample
             key={component.title}
@@ -65,7 +65,7 @@ export default function Page(): React.ReactElement {
               gridRow: `span ${component.rowSpan ?? 1}`,
             }}
           >
-            {component.example}
+            {component.miniExample ?? component.example}
           </MiniExample>
         ))}
       </div>
