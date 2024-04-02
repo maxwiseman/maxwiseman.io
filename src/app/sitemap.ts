@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://maxwiseman.io/",
-      lastModified: "April 1 2024",
+      lastModified: new Date("April 1 2024"),
       changeFrequency: "weekly",
       priority: 1,
     },
