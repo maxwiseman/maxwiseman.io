@@ -17,8 +17,8 @@ tr:nth-child(even):not(:nth-child(2)) td:first-child {
   border-right-width: 2px;
   border-right-color: hsl(var(--muted-foreground));
 }
-tr:nth-child(even):not(:nth-child(2)) td:first-child,
-tr:nth-child(odd):not(:first-child) td:first-child {
+tr:nth-child(even):not(:nth-child(2)):not(:last-child) td:first-child,
+tr:nth-child(odd):not(:first-child):not(:nth-last-child(2)) td:first-child {
   border-bottom-width: 2px;
   border-bottom-color: hsl(var(--muted-foreground));
 }

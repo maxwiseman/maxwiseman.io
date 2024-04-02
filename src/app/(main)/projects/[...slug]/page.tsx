@@ -9,11 +9,27 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { type Metadata } from "next";
 
 export async function generateStaticParams() {
   return allProjects.map((project) => ({
     slug: project._raw.flattenedPath.split("/"),
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string[] };
+}): Promise<Metadata> {
+  const project = allProjects.find(
+    (project) =>
+      project._raw.flattenedPath.replace("projects/", "") ===
+      params.slug.join("/"),
+  );
+  return {
+    title: `${project?.title} - Max Wiseman`,
+  };
 }
 
 export default async function Page({

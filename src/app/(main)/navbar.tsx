@@ -18,10 +18,10 @@ export function Navbar() {
         </Link>
         <div className="flex gap-4">
           <Link
-            href="/"
+            href="/projects"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Home
+            Projects
           </Link>
           <Link
             href="/posts"
