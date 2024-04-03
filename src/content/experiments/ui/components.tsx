@@ -5,9 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Command,
+  CommandEmpty,
+  CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
+  CommandShortcut,
 } from "@/components/ui/command";
 import {
   Dialog,
@@ -26,7 +30,14 @@ import {
   TableOfContentsList,
   TableOfContentsTitle,
 } from "@/components/ui/toc";
-import { IconUser } from "@tabler/icons-react";
+import {
+  IconCalendar,
+  IconMail,
+  IconMoodHappy,
+  IconRocket,
+  IconSettings,
+  IconUser,
+} from "@tabler/icons-react";
 
 export const components: {
   id: string;
@@ -110,12 +121,42 @@ export const components: {
       "A command bar allows users to search and execute actions quickly",
     componentPath: "src/components/ui/command.tsx",
     example: (
-      <Command>
-        <CommandInput placeholder="Type something..." />
+      <Command className="rounded-lg border shadow-md">
+        <CommandInput placeholder="Type a command or search..." />
         <CommandList>
-          <CommandItem>Item 1</CommandItem>
-          <CommandItem>Item 2</CommandItem>
-          <CommandItem>Item 3</CommandItem>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Suggestions">
+            <CommandItem>
+              <IconCalendar className="mr-2 h-4 w-4" />
+              <span>Calendar</span>
+            </CommandItem>
+            <CommandItem>
+              <IconMoodHappy className="mr-2 h-4 w-4" />
+              <span>Search Emoji</span>
+            </CommandItem>
+            <CommandItem>
+              <IconRocket className="mr-2 h-4 w-4" />
+              <span>Launch</span>
+            </CommandItem>
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Settings">
+            <CommandItem>
+              <IconUser className="mr-2 h-4 w-4" />
+              <span>Profile</span>
+              <CommandShortcut>⌘P</CommandShortcut>
+            </CommandItem>
+            <CommandItem>
+              <IconMail className="mr-2 h-4 w-4" />
+              <span>Mail</span>
+              <CommandShortcut>⌘B</CommandShortcut>
+            </CommandItem>
+            <CommandItem>
+              <IconSettings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+              <CommandShortcut>⌘S</CommandShortcut>
+            </CommandItem>
+          </CommandGroup>
         </CommandList>
       </Command>
     ),
