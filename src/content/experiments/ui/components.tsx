@@ -1,6 +1,7 @@
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 
 export const components: {
   id: string;
@@ -15,14 +16,14 @@ export const components: {
   {
     id: "button",
     title: "Button",
-    description: "Buttons are essential components for modern web apps.",
+    description: "Buttons are essential components for modern web apps",
     componentPath: "src/components/ui/button.tsx",
     example: <Button>Button</Button>,
   },
   {
     id: "input",
     title: "Input",
-    description: "This component allows users to input text.",
+    description: "This component allows users to input text",
     componentPath: "src/components/ui/input.tsx",
     example: <Input placeholder="Type something..." />,
     colSpan: 2,
@@ -30,7 +31,7 @@ export const components: {
   {
     id: "breadcrumb",
     title: "Breadcrumb",
-    description: "Breadcrumbs help users navigate your site.",
+    description: "Breadcrumbs help users navigate your site",
     componentPath: "src/components/ui/breadcrumb.tsx",
     miniExample: (
       <BreadcrumbGroup
@@ -46,5 +47,12 @@ export const components: {
         ]}
       />
     ),
+  },
+  {
+    id: "spinner",
+    title: "Spinner",
+    description: "A spinner can help users tell when content is loading",
+    componentPath: "src/components/ui/spinner.tsx",
+    example: <Spinner />,
   },
 ];

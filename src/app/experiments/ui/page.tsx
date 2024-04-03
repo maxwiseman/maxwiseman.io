@@ -1,5 +1,5 @@
 import { MiniExample } from "./component-example";
-import { components } from "./components";
+import { components } from "../../../content/experiments/ui/components";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { type Metadata } from "next";

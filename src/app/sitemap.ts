@@ -1,7 +1,7 @@
 import { allPosts, allProjects } from "contentlayer/generated";
 import { type MetadataRoute } from "next";
 import { allExperiments } from "./experiments/experiments";
-import { components } from "./experiments/ui/components";
+import { components } from "../content/experiments/ui/components";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const recentPost = allPosts.sort(

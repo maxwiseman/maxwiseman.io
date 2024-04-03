@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { components } from "../components";
+import { components } from "../../../../content/experiments/ui/components";
 import { ComponentExample } from "../component-example";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { type Metadata } from "next";
