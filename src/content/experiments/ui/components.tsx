@@ -20,6 +20,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Spinner } from "@/components/ui/spinner";
+import {
+  TableOfContentsItem,
+  TableOfContentsLink,
+  TableOfContentsList,
+  TableOfContentsTitle,
+} from "@/components/ui/toc";
 import { IconUser } from "@tabler/icons-react";
 
 export const components: {
@@ -197,6 +203,32 @@ export const components: {
           </AvatarFallback>
         </Avatar>
       </AvatarGroup>
+    ),
+  },
+  {
+    id: "toc",
+    title: "Table of Contents",
+    description: "Allows users to quickly navigate long documents",
+    componentPath: "src/components/ui/toc.tsx",
+    example: (
+      <TableOfContentsList>
+        <TableOfContentsTitle>Table of Contents</TableOfContentsTitle>
+        <TableOfContentsItem>
+          <TableOfContentsLink href="#first-section">
+            First Section
+          </TableOfContentsLink>
+        </TableOfContentsItem>
+        <TableOfContentsItem indent>
+          <TableOfContentsLink href="#second-section">
+            Second Section
+          </TableOfContentsLink>
+        </TableOfContentsItem>
+        <TableOfContentsItem>
+          <TableOfContentsLink href="#third-section">
+            Third Section
+          </TableOfContentsLink>
+        </TableOfContentsItem>
+      </TableOfContentsList>
     ),
   },
 ];

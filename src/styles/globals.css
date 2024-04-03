@@ -107,7 +107,7 @@ h6:hover > .subheading-anchor::before {
   color: hsl(var(--muted-foreground));
 }
 
-ul > li::before {
+.mdx ul > li::before {
   content: "—";
   position: absolute;
   left: 0;
