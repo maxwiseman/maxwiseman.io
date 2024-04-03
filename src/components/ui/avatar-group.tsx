@@ -56,7 +56,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     return (
       <div
         ref={ref}
-        className={cn("relative flex flex-wrap", className)}
+        className={cn("relative flex flex-nowrap", className)}
         {...props}
       >
         {renderContent}
