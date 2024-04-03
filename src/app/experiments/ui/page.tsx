@@ -1,13 +1,6 @@
-import { MiniExample } from "./example";
+import { MiniExample } from "./component-example";
 import { components } from "./components";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { type Metadata } from "next";
 
@@ -19,25 +12,22 @@ export const metadata: Metadata = {
 export default function Page(): React.ReactElement {
   return (
     <div className="w-full max-w-prose">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/experiments">Experiments</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>UI</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadcrumbGroup
+        items={[
+          {
+            title: "Home",
+            href: "/",
+          },
+          {
+            title: "Experiments",
+            href: "/experiments",
+          },
+          {
+            title: "UI",
+            href: "/experiments/ui",
+          },
+        ]}
+      />
       <h1 className="mt-4 scroll-m-20 text-4xl font-bold tracking-tight">
         UI Components
       </h1>

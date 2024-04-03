@@ -115,7 +115,7 @@ function BreadcrumbGroup({
       {items.map((item, index) => {
         if (index === items.length - 1) {
           return (
-            <BreadcrumbItem key={index}>
+            <BreadcrumbItem key={item.title}>
               <BreadcrumbPage>{item.title}</BreadcrumbPage>
             </BreadcrumbItem>
           );

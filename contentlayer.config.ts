@@ -27,6 +27,18 @@ export const Post = defineDocumentType(() => ({
   },
 }));
 
+export const UI = defineDocumentType(() => ({
+  name: "UIComponent",
+  filePathPattern: "experiments/ui/**/*.mdx",
+  contentType: "mdx",
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (post) => `/${post._raw.flattenedPath}`,
+    },
+  },
+}));
+
 export const Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: "projects/**/*.mdx",
@@ -63,7 +75,7 @@ export const Project = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "src/content",
-  documentTypes: [Post, Project, Misc],
+  documentTypes: [Post, Project, Misc, UI],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

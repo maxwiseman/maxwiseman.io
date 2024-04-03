@@ -1,11 +1,4 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { Card } from "@/components/ui/card";
 import { allPosts } from "contentlayer/generated";
 import { type Metadata } from "next";
@@ -19,19 +12,18 @@ export const metadata: Metadata = {
 export default function PostsPage() {
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Posts</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadcrumbGroup
+        items={[
+          {
+            title: "Home",
+            href: "/",
+          },
+          {
+            title: "Posts",
+            href: "/posts",
+          },
+        ]}
+      />
       <h1 className="mt-4 scroll-m-20 text-4xl font-bold tracking-tight">
         Posts
       </h1>

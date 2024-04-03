@@ -10,15 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { type Metadata } from "next";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import Link from "next/link";
+import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 
 export async function generateStaticParams() {
   return allProjects.map((project) => ({
@@ -66,25 +58,21 @@ export default async function Page({
 
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/projects">Projects</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{project.title}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadcrumbGroup
+        items={[
+          {
+            title: "Home",
+            href: "/",
+          },
+          {
+            title: "Projects",
+            href: "/projects",
+          },
+          {
+            title: project.title,
+          },
+        ]}
+      />
       <h1 className="mb-4 mt-4 flex scroll-m-20 items-center gap-4 text-4xl font-bold tracking-tight">
         <span className="shrink-0">{project.title}</span>
         <div className="inline-flex flex-wrap gap-2">

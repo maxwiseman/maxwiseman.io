@@ -1,16 +1,10 @@
 import { notFound } from "next/navigation";
 import { components } from "../components";
-import { Example } from "../example";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import Link from "next/link";
+import { ComponentExample } from "../component-example";
+import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { type Metadata } from "next";
+import { Mdx } from "@/components/mdx";
+import { allUIComponents } from "contentlayer/generated";
 
 export function generateMetadata({
   params,
@@ -38,36 +32,34 @@ export default async function Page({ params }: { params: { id: string[] } }) {
     (component) => component.id === params.id.join("/"),
   );
 
+  const markdownContent = allUIComponents.find(
+    (val) => val.url === `/experiments/ui/${params.id.join("/")}`,
+  );
+
   if (!component) notFound();
 
   return (
     <div className="w-full max-w-prose">
       <div className="mb-6">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/experiments">Experiments</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/experiments/ui">UI</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{component.title}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <BreadcrumbGroup
+          items={[
+            {
+              title: "Home",
+              href: "/",
+            },
+            {
+              title: "Experiments",
+              href: "/experiments",
+            },
+            {
+              title: "UI",
+              href: "/experiments/ui",
+            },
+            {
+              title: component.title,
+            },
+          ]}
+        />
         <h1 className="mt-4 scroll-m-20 text-4xl font-bold tracking-tight">
           {component.title}
         </h1>
@@ -75,9 +67,13 @@ export default async function Page({ params }: { params: { id: string[] } }) {
           {component.description}
         </h3>
       </div>
-      <Example componentPath={component?.componentPath}>
+      <ComponentExample
+        className="mb-8"
+        componentPath={component?.componentPath}
+      >
         {component.example}
-      </Example>
+      </ComponentExample>
+      {markdownContent ? <Mdx code={markdownContent.body.code} /> : null}
     </div>
   );
 }

@@ -9,7 +9,7 @@ import path from "path";
 import { type DetailedHTMLProps, type HTMLAttributes } from "react";
 import { codeToHtml } from "shiki";
 
-export async function Example({
+export async function ComponentExample({
   children,
   componentPath,
   ...props
