@@ -1,5 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/ui/avatar-group";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupList,
+  AvatarImage,
+  AvatarOverflowIndicator,
+} from "@/components/ui/avatar";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -24,6 +30,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Spinner } from "@/components/ui/spinner";
+import { Step, Steps } from "@/components/ui/steps";
 import {
   TableOfContentsItem,
   TableOfContentsLink,
@@ -57,11 +64,51 @@ export const components: {
     example: <Button>Button</Button>,
   },
   {
-    id: "input",
-    title: "Input",
-    description: "This component allows users to input text",
-    componentPath: "src/components/ui/input.tsx",
-    example: <Input placeholder="Type something..." />,
+    id: "command",
+    title: "Command",
+    description:
+      "A command bar allows users to search and execute actions quickly",
+    componentPath: "src/components/ui/command.tsx",
+    example: (
+      <Command className="rounded-lg border shadow-md">
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Suggestions">
+            <CommandItem>
+              <IconCalendar className="mr-2 h-4 w-4" />
+              <span>Calendar</span>
+            </CommandItem>
+            <CommandItem>
+              <IconMoodHappy className="mr-2 h-4 w-4" />
+              <span>Search Emoji</span>
+            </CommandItem>
+            <CommandItem>
+              <IconRocket className="mr-2 h-4 w-4" />
+              <span>Launch</span>
+            </CommandItem>
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Settings">
+            <CommandItem>
+              <IconUser className="mr-2 h-4 w-4" />
+              <span>Profile</span>
+              <CommandShortcut>⌘P</CommandShortcut>
+            </CommandItem>
+            <CommandItem>
+              <IconMail className="mr-2 h-4 w-4" />
+              <span>Mail</span>
+              <CommandShortcut>⌘B</CommandShortcut>
+            </CommandItem>
+            <CommandItem>
+              <IconSettings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+              <CommandShortcut>⌘S</CommandShortcut>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    ),
     colSpan: 2,
   },
   {
@@ -115,51 +162,11 @@ export const components: {
     ),
   },
   {
-    id: "command",
-    title: "Command",
-    description:
-      "A command bar allows users to search and execute actions quickly",
-    componentPath: "src/components/ui/command.tsx",
-    example: (
-      <Command className="rounded-lg border shadow-md">
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <IconCalendar className="mr-2 h-4 w-4" />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <IconMoodHappy className="mr-2 h-4 w-4" />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <IconRocket className="mr-2 h-4 w-4" />
-              <span>Launch</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <IconUser className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <IconMail className="mr-2 h-4 w-4" />
-              <span>Mail</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <IconSettings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
-      </Command>
-    ),
+    id: "input",
+    title: "Input",
+    description: "This component allows users to input text",
+    componentPath: "src/components/ui/input.tsx",
+    example: <Input placeholder="Type something..." />,
     colSpan: 2,
   },
   {
@@ -204,45 +211,34 @@ export const components: {
     description: "Avatar can display a user's profile picture",
     componentPath: "src/components/ui/avatar.tsx",
     example: (
-      <Avatar>
-        <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
-        <AvatarFallback>
-          <IconUser />
-        </AvatarFallback>
-      </Avatar>
-    ),
-  },
-  {
-    id: "avatar-group",
-    title: "Avatar Group",
-    description: "Great for when lots of users need to be displayed together",
-    componentPath: "src/components/ui/avatar-group.tsx",
-    example: (
-      <AvatarGroup max={2}>
-        <Avatar>
-          <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
-          <AvatarFallback>
-            <IconUser />
-          </AvatarFallback>
-        </Avatar>
-        <Avatar>
-          <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
-          <AvatarFallback>
-            <IconUser />
-          </AvatarFallback>
-        </Avatar>
-        <Avatar>
-          <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
-          <AvatarFallback>
-            <IconUser />
-          </AvatarFallback>
-        </Avatar>
-        <Avatar>
-          <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
-          <AvatarFallback>
-            <IconUser />
-          </AvatarFallback>
-        </Avatar>
+      <AvatarGroup limit={2}>
+        <AvatarGroupList>
+          <Avatar>
+            <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
+            <AvatarFallback>
+              <IconUser />
+            </AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
+            <AvatarFallback>
+              <IconUser />
+            </AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
+            <AvatarFallback>
+              <IconUser />
+            </AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://avatars.githubusercontent.com/u/124599" />
+            <AvatarFallback>
+              <IconUser />
+            </AvatarFallback>
+          </Avatar>
+        </AvatarGroupList>
+        <AvatarOverflowIndicator />
       </AvatarGroup>
     ),
   },
@@ -270,6 +266,28 @@ export const components: {
           </TableOfContentsLink>
         </TableOfContentsItem>
       </TableOfContentsList>
+    ),
+  },
+  {
+    id: "steps",
+    title: "Steps",
+    description: "Allows users to follow a sequence of steps",
+    componentPath: "src/components/ui/steps.tsx",
+    miniExample: (
+      <Steps>
+        <Step>Step 1</Step>
+        Content
+      </Steps>
+    ),
+    example: (
+      <Steps>
+        <Step>Step 1</Step>
+        Step 1 content here
+        <Step>Step 2</Step>
+        Step 2 content here
+        <Step>Step 3</Step>
+        Step 3 content here
+      </Steps>
     ),
   },
 ];

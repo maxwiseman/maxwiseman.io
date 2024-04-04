@@ -15,7 +15,7 @@ const Command = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
+      "flex h-full max-h-max w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
       className,
     )}
     ref={ref}
@@ -72,7 +72,7 @@ const CommandList = React.forwardRef<
     )}
     scrollShadow="bottom"
   >
-    <CommandPrimitive.List ref={ref} {...props} />
+    <CommandPrimitive.List className="pb-1" ref={ref} {...props} />
   </ScrollArea>
 ));
 

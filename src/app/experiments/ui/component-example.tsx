@@ -78,7 +78,7 @@ export async function MiniExample({
 
   return (
     <div className={cn("flex flex-col gap-2", className)} {...props}>
-      <Card className="relative flex h-48 grow items-center justify-center p-8">
+      <Card className="relative flex h-48 grow items-center justify-center overflow-hidden p-8">
         <ClipboardButton
           className="absolute right-0 top-0 m-2 h-6 w-6 [&>div>svg]:!h-3 [&>div>svg]:!w-3"
           text={componentCode}
