@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { components } from "../../../../content/experiments/ui/components";
 import { ComponentExample } from "../component-example";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { type Metadata } from "next";
@@ -11,8 +10,8 @@ export function generateMetadata({
 }: {
   params: { id: string[] };
 }): Metadata {
-  const component = components.find(
-    (component) => component.id === params.id.join("/"),
+  const component = allUIComponents.find(
+    (component) => component.componentId === params.id.join("/"),
   );
 
   return {
@@ -22,22 +21,19 @@ export function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return components.map((component) => ({
-    id: component.id.split("/"),
+  return allUIComponents.map((component) => ({
+    id: component.componentId.split("/"),
   }));
 }
 
 export default async function Page({ params }: { params: { id: string[] } }) {
-  const component = components.find(
-    (component) => component.id === params.id.join("/"),
-  );
-
   const markdownContent = allUIComponents.find(
-    (val) => val.url === `/experiments/ui/${params.id.join("/")}`,
+    (val) => val.componentId === params.id.join("/"),
   );
 
-  if (!component) notFound();
+  if (!markdownContent) notFound();
 
+  console.log("examples", markdownContent?.examples);
   return (
     <div className="w-full max-w-prose">
       <div className="mb-6">
@@ -56,24 +52,39 @@ export default async function Page({ params }: { params: { id: string[] } }) {
               href: "/experiments/ui",
             },
             {
-              title: component.title,
+              title: markdownContent.title,
             },
           ]}
         />
         <h1 className="mt-4 scroll-m-20 text-4xl font-bold tracking-tight">
-          {component.title}
+          {markdownContent.title}
         </h1>
         <h3 className="mt-2 scroll-m-20 text-lg tracking-tight text-muted-foreground">
-          {component.description}
+          {markdownContent.description}
         </h3>
       </div>
       <ComponentExample
         className="mb-8"
-        componentPath={component?.componentPath}
-      >
-        {component.example}
-      </ComponentExample>
+        // componentPath={`src/content/experiments/ui/${markdownContent?.componentId}/example.tsx`}
+        componentId={markdownContent.componentId}
+      />
       {markdownContent ? <Mdx code={markdownContent.body.code} /> : null}
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+      {markdownContent.examples.length > 1 && (
+        <h2 className="mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0">
+          Usage
+        </h2>
+      )}
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */}
+      {markdownContent.examples.map((example: string) => (
+        <ComponentExample
+          key={example}
+          className="mb-8"
+          // componentPath={`src/content/experiments/ui/${markdownContent?.componentId}/example.tsx`}
+          componentId={markdownContent.componentId}
+          exampleId={example}
+        />
+      ))}
     </div>
   );
 }

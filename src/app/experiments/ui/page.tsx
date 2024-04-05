@@ -1,8 +1,8 @@
 import { MiniExample } from "./component-example";
-import { components } from "../../../content/experiments/ui/components";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { type Metadata } from "next";
+import { allUIComponents } from "contentlayer/generated";
 
 export const metadata: Metadata = {
   title: "UI Components - Max Wiseman",
@@ -43,21 +43,23 @@ export default function Page(): React.ReactElement {
         with minor alterations
       </h3>
       <div className="grid w-full grid-flow-row-dense grid-cols-2 gap-8 py-8 md:grid-cols-3">
-        {components.map((component) => (
-          <MiniExample
-            key={component.title}
-            title={component.title}
-            descrption={component.description}
-            componentPath={component.componentPath}
-            href={`/experiments/ui/${component.id}`}
-            style={{
-              gridColumn: `span ${component.colSpan ?? 1}`,
-              gridRow: `span ${component.rowSpan ?? 1}`,
-            }}
-          >
-            {component.miniExample ?? component.example}
-          </MiniExample>
-        ))}
+        {allUIComponents
+          .sort((a, b) => new Intl.Collator("en").compare(a.title, b.title))
+          .map((component) => (
+            <MiniExample
+              key={component.title}
+              title={component.title}
+              descrption={component.description}
+              componentId={component.componentId}
+              href={`/experiments/ui/${component.componentId}`}
+              style={{
+                gridColumn: `span ${component.colSpan ?? 1}`,
+                gridRow: `span ${component.rowSpan ?? 1}`,
+              }}
+            >
+              {/* {component.miniExample ?? component.example} */}
+            </MiniExample>
+          ))}
       </div>
     </div>
   );

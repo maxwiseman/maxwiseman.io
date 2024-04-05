@@ -1,7 +1,6 @@
-import { allPosts, allProjects } from "contentlayer/generated";
+import { allPosts, allProjects, allUIComponents } from "contentlayer/generated";
 import { type MetadataRoute } from "next";
 import { allExperiments } from "./experiments/experiments";
-import { components } from "../content/experiments/ui/components";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const recentPost = allPosts.sort(
@@ -56,9 +55,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.3,
       }),
     ),
-    ...components.map(
+    ...allUIComponents.map(
       (component): sitemapProperty => ({
-        url: `https://maxwiseman.io/experiments/ui/${component.id}`,
+        url: `https://maxwiseman.io/experiments/ui/${component.componentId}`,
         changeFrequency: "monthly",
         priority: 0.3,
       }),

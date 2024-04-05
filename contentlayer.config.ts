@@ -3,6 +3,8 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+import { promises as fs } from "fs";
+import path from "path";
 
 export const Misc = defineDocumentType(() => ({
   name: "Misc",
@@ -29,9 +31,45 @@ export const Post = defineDocumentType(() => ({
 
 export const UI = defineDocumentType(() => ({
   name: "UIComponent",
-  filePathPattern: "experiments/ui/**/*.mdx",
+  filePathPattern: "experiments/ui/*/component.mdx",
   contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+    colSpan: { type: "number", required: false },
+    rowSpan: { type: "number", required: false },
+  },
   computedFields: {
+    componentId: {
+      type: "string",
+      resolve: (component): string =>
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        component._raw.flattenedPath.match(
+          /(?<=^experiments\/ui\/).*(?=\/component)/g,
+        )?.[0]!,
+    },
+    examples: {
+      type: "list",
+      resolve: async (component): Promise<string[]> => {
+        const data = await fs
+          .readdir(
+            path.join(
+              process.cwd(),
+              "src/content/experiments/ui",
+              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+              component._raw.flattenedPath.match(
+                /(?<=^experiments\/ui\/).*(?=\/component)/g,
+              )?.[0]!,
+            ),
+          )
+          .then((files) =>
+            files
+              .filter((file) => file.endsWith(".tsx") && file !== "example.tsx")
+              .map((file) => file.replace(".tsx", "")),
+          );
+        return data;
+      },
+    },
     url: {
       type: "string",
       resolve: (post) => `/${post._raw.flattenedPath}`,

@@ -1,17 +1,9 @@
-import { Example } from '@/components/example'
-import { Button } from '@/components/ui/button'
-import { IconSend } from '@tabler/icons-react'
+---
+title: 'Button'
+description: 'A button component that can be used to trigger an action'
+colSpan: 1
+rowSpan: 1
+---
 
 ## Additions
 The button component is based off of the [shadcn/ui component](https://ui.shadcn.com/docs/components/button) by the same name, but with a few notable additions. The button component sports two new props: loading, and icon. The loading prop is a boolean that, when true, will disable the button and display a loading spinner in place of an icon. The icon prop takes a React component. The icon will be displayed to the left of the button children. Although you could pass an icon in the children, this would now allow for the icon to be hidden while the button is in the loading state. There is also no need to add margin to the icon, as it will be added automatically.
-
-## Examples
-
-### Loading
-<Example><Button loading>Loading</Button></Example>
-
-### Disabled
-<Example><Button disabled>Disabled</Button></Example>
-
-### With Icon
-<Example><Button icon={<IconSend />}>Send</Button></Example>
