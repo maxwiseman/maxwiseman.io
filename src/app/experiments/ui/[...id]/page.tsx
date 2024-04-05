@@ -70,7 +70,11 @@ export default async function Page({ params }: { params: { id: string[] } }) {
       {markdownContent ? <Mdx code={markdownContent.body.code} /> : null}
       {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
       {markdownContent.examples.length > 1 && (
-        <h2 className="mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0">
+        <h2
+          id="usage"
+          className="mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0"
+        >
+          <a href="#usage" className="subheading-anchor" />
           Usage
         </h2>
       )}

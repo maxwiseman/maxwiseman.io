@@ -13,6 +13,7 @@ import { LinkEmbed } from "./link-embed";
 import { ProjectList } from "./project-list";
 import { PostList } from "./post-list";
 import { ClipboardButton } from "./clipboard-button";
+import { Step, Steps } from "./ui/steps";
 
 const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -214,6 +215,8 @@ const mdxComponents = {
   LinkEmbed,
   ProjectList,
   PostList,
+  Steps,
+  Step,
 };
 
 export function Mdx(props: {

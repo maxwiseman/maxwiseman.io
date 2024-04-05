@@ -39,9 +39,18 @@ export async function ComponentExample({
 
   return (
     <>
-      <h3 className="mb-4 mt-8 scroll-m-20 text-2xl font-semibold tracking-tight">
-        {exampleTitle}
-      </h3>
+      {exampleTitle !== "" && (
+        <h3
+          id={exampleTitle.replaceAll(" ", "-").toLowerCase()}
+          className="mb-4 mt-8 scroll-m-20 text-2xl font-semibold tracking-tight"
+        >
+          <a
+            href={`#${exampleTitle.replaceAll(" ", "-").toLowerCase()}`}
+            className="subheading-anchor"
+          />
+          {exampleTitle}
+        </h3>
+      )}
       <Tabs defaultValue="preview" {...props}>
         <TabsList>
           <TabsTrigger value="preview">Preview</TabsTrigger>

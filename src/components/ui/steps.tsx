@@ -8,7 +8,7 @@ export function Steps({
   return (
     <div
       className={cn(
-        "[&>h3]:step steps ml-4 border-l pl-8 [counter-reset:step]",
+        "[&>h3]:step steps ml-4 border-l pl-[2.1rem] [counter-reset:step]",
         className,
       )}
       {...props}
