@@ -65,7 +65,8 @@ export const UI = defineDocumentType(() => ({
           .then((files) =>
             files
               .filter((file) => file.endsWith(".tsx") && file !== "example.tsx")
-              .map((file) => file.replace(".tsx", "")),
+              .map((file) => file.replace(".tsx", ""))
+              .filter((file) => file !== "mini-example"),
           );
         return data;
       },

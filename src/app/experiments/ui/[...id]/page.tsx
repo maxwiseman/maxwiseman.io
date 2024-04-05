@@ -33,7 +33,6 @@ export default async function Page({ params }: { params: { id: string[] } }) {
 
   if (!markdownContent) notFound();
 
-  console.log("examples", markdownContent?.examples);
   return (
     <div className="w-full max-w-prose">
       <div className="mb-6">

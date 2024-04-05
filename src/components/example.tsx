@@ -19,7 +19,6 @@ export async function Example({
   ) as React.ReactElement[];
 
   if (!file) return <></>;
-  console.log("file name", file);
 
   return (
     <Tabs defaultValue="preview" {...props}>
