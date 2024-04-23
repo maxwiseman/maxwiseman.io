@@ -131,7 +131,7 @@ export default makeSource({
       [
         rehypePrettyCode as (options: Options) => undefined,
         {
-          themes: {
+          theme: {
             light: "github-light",
             dark: "github-dark",
           },
