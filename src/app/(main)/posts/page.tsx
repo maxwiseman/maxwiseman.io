@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function PostsPage() {
+  allPosts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
   return (
     <>
       <BreadcrumbGroup

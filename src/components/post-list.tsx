@@ -4,6 +4,10 @@ import { Card } from "./ui/card";
 import Link from "next/link";
 
 export function PostList() {
+  allPosts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+
   return (
     <div className="relative">
       <div

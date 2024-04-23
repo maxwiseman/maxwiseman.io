@@ -8,7 +8,7 @@ export function Steps({
   return (
     <div
       className={cn(
-        "[&>h3]:step steps ml-4 border-l pl-[2.1rem] [counter-reset:step]",
+        "[&>div]:step steps ml-4 border-l pl-[2.1rem] [counter-reset:step]",
         className,
       )}
       {...props}
@@ -20,11 +20,12 @@ export function Step({
   ...props
 }: { children?: React.ReactNode } & HTMLAttributes<HTMLDivElement>) {
   return (
-    <h3
-      className={cn(
-        "font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-        className,
-      )}
+    <div
+      // className={cn(
+      //   "font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
+      //   className,
+      // )}
+      className={cn("", className)}
       {...props}
     />
   );

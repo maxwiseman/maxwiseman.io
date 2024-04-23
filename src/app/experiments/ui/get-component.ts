@@ -1,4 +1,8 @@
+"use server";
+
 import { lazy, type ComponentType } from "react";
+import { promises as fs } from "fs";
+import path from "path";
 
 export async function getComponentExample(
   filePath: string,
@@ -12,4 +16,11 @@ export async function getComponentExample(
       ) as Promise<{ default: ComponentType<any> }>,
   );
   return Component;
+}
+
+export async function getComponentCode(componentId: string) {
+  const code = await fs.readFile(
+    path.join(process.cwd(), "src/components/ui", `${componentId}.tsx`),
+  );
+  return code.toString();
 }
