@@ -5,6 +5,7 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import { promises as fs } from "fs";
 import path from "path";
+import { type RepoData } from "@/app/(main)/projects/[...slug]/github-widget";
 
 export const Misc = defineDocumentType(() => ({
   name: "Misc",
@@ -108,6 +109,17 @@ export const Project = defineDocumentType(() => ({
     url: {
       type: "string",
       resolve: (project) => `/${project._raw.flattenedPath}`,
+    },
+    repoData: {
+      type: "json",
+      resolve: async (project) => {
+        const projectData = await fetch(
+          `https://api.github.com/repos/${project.repo}`,
+        ).then(async (res) => {
+          return (await res.json()) as RepoData;
+        });
+        return projectData;
+      },
     },
   },
 }));

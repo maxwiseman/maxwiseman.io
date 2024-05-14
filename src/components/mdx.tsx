@@ -15,6 +15,7 @@ import { PostList } from "./post-list";
 import { ClipboardButton } from "./clipboard-button";
 import { Step, Steps } from "./ui/steps";
 import { ComponentCode } from "@/app/experiments/ui/component-code";
+import { SiteScreenshot } from "./site-screenshot";
 
 const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -219,6 +220,7 @@ const mdxComponents = {
   Steps,
   Step,
   ComponentCode,
+  SiteScreenshot,
 };
 
 export function Mdx(props: {
