@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card } from "./ui/card";
 import { LinkButton } from "./ui/button";
 import { IconBrandGithub, IconLink } from "@tabler/icons-react";
-import { type RepoData } from "@/app/(main)/projects/[...slug]/github-widget";
+import { type RepoData } from "@/app/(main)/(narrow)/projects/[...slug]/github-widget";
 
 export function ProjectList() {
   return (

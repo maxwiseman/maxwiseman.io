@@ -36,6 +36,12 @@ export function Navbar() {
           >
             Experiments
           </Link>
+          <Link
+            href="/gallery"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Gallery
+          </Link>
         </div>
       </div>
     </nav>

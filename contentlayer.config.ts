@@ -5,7 +5,7 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import { promises as fs } from "fs";
 import path from "path";
-import { type RepoData } from "@/app/(main)/projects/[...slug]/github-widget";
+import { type RepoData } from "@/app/(main)/(narrow)/projects/[...slug]/github-widget";
 
 export const Misc = defineDocumentType(() => ({
   name: "Misc",
