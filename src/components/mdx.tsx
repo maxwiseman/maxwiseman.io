@@ -7,9 +7,8 @@ import Image from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import Children from "react-children-utilities";
-import { LinkEmbed } from "./link-embed";
+import { LinkEmbed, LinkPreview } from "./link-embed";
 import { ProjectList } from "./project-list";
 import { PostList } from "./post-list";
 import { ClipboardButton } from "./clipboard-button";
@@ -76,7 +75,7 @@ const mdxComponents = {
     className,
     ...props
   }: React.HTMLAttributes<HTMLAnchorElement> & { href?: string }) => (
-    <Link
+    <LinkPreview
       className={cn(
         "font-medium underline decoration-muted-foreground/50 underline-offset-4 transition-colors duration-300 hover:decoration-foreground",
         className,
