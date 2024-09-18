@@ -1,3 +1,4 @@
+import { siteURL } from "@/lib/utils";
 import { allUIComponents } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { type NextRequest } from "next/server";
@@ -15,7 +16,9 @@ export async function GET(req: NextRequest, data: { params: { id: string } }) {
     name: componentData.componentId,
     type: "registry:ui",
     dependencies: componentData.dependencies,
-    registryDependencies: componentData.registryDependencies,
+    registryDependencies: componentData.registryDependencies?.map(
+      (dep) => `${siteURL}/experiments/ui/${dep}/json`,
+    ),
     files: [
       {
         path: `ui/${data.params.id}.tsx`,

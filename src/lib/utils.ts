@@ -13,3 +13,10 @@ export function capitalize(str: string) {
     )
     .join(" ");
 }
+
+export const siteURL =
+  process.env.VERCEL_ENV === "production"
+    ? "https://" + process.env.VERCEL_PROJECT_PRODUCTION_URL
+    : process.env.VERCEL_URL
+      ? "https://" + process.env.VERCEL_URL
+      : "http://localhost:3000";

@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { Mdx } from "@/components/mdx";
 import { allUIComponents } from "contentlayer/generated";
 import { CodeBlock } from "@/components/code";
+import { siteURL } from "@/lib/utils";
 
 export function generateMetadata({
   params,
@@ -77,7 +78,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </h2>
       <div className="mb-12 mt-6">
         <CodeBlock
-          code={`bunx shadcn@latest add https://maxwiseman.io/experiments/ui/${markdownContent.componentId}/json`}
+          code={`bunx shadcn@latest add ${siteURL}/experiments/ui/${markdownContent.componentId}/json`}
           lang="sh"
         />
       </div>
