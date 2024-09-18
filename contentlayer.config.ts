@@ -55,6 +55,23 @@ export const UI = defineDocumentType(() => ({
           /(?<=^experiments\/ui\/).*(?=\/component)/g,
         )?.[0]!,
     },
+    componentCode: {
+      type: "string",
+      resolve: async (component): Promise<string> => {
+        const code = await fs.readFile(
+          path.join(
+            process.cwd(),
+            "src/components/ui",
+            `${
+              component._raw.flattenedPath.match(
+                /(?<=^experiments\/ui\/).*(?=\/component)/g,
+              )?.[0]
+            }.tsx`,
+          ),
+        );
+        return code.toString();
+      },
+    },
     examples: {
       type: "list",
       resolve: async (component): Promise<string[]> => {

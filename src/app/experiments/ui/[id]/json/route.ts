@@ -1,7 +1,6 @@
 import { allUIComponents } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { type NextRequest } from "next/server";
-import { getComponentCode } from "../../get-component";
 
 export const dynamic = "force-static";
 
@@ -12,8 +11,6 @@ export async function GET(req: NextRequest, data: { params: { id: string } }) {
 
   if (!componentData) notFound();
 
-  const componentCode = await getComponentCode(data.params.id);
-
   return Response.json({
     name: componentData.componentId,
     type: "registry:ui",
@@ -22,7 +19,7 @@ export async function GET(req: NextRequest, data: { params: { id: string } }) {
     files: [
       {
         path: `ui/${data.params.id}.tsx`,
-        content: componentCode,
+        content: componentData.componentCode,
         type: "registry:ui",
         target: "",
       },
