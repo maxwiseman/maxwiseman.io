@@ -4,14 +4,15 @@ import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
 import { type Metadata } from "next";
 import { Mdx } from "@/components/mdx";
 import { allUIComponents } from "contentlayer/generated";
+import { CodeBlock } from "@/components/code";
 
 export function generateMetadata({
   params,
 }: {
-  params: { id: string[] };
+  params: { id: string };
 }): Metadata {
   const component = allUIComponents.find(
-    (component) => component.componentId === params.id.join("/"),
+    (component) => component.componentId === params.id,
   );
 
   return {
@@ -22,13 +23,13 @@ export function generateMetadata({
 
 export function generateStaticParams() {
   return allUIComponents.map((component) => ({
-    id: component.componentId.split("/"),
+    id: component.componentId,
   }));
 }
 
-export default async function Page({ params }: { params: { id: string[] } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const markdownContent = allUIComponents.find(
-    (val) => val.componentId === params.id.join("/"),
+    (val) => val.componentId === params.id,
   );
 
   if (!markdownContent) notFound();
@@ -67,6 +68,19 @@ export default async function Page({ params }: { params: { id: string[] } }) {
         // componentPath={`src/content/experiments/ui/${markdownContent?.componentId}/example.tsx`}
         componentId={markdownContent.componentId}
       />
+      <h2
+        id="installation"
+        className="mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0"
+      >
+        <a href="#installation" className="subheading-anchor" />
+        Installation
+      </h2>
+      <div className="mb-12 mt-6">
+        <CodeBlock
+          code={`bunx shadcn@latest add https://maxwiseman.io/experiments/ui/${markdownContent.componentId}/json`}
+          lang="sh"
+        />
+      </div>
       {markdownContent ? <Mdx code={markdownContent.body.code} /> : null}
       {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
       {markdownContent.examples.length > 1 && (

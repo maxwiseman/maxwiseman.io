@@ -1,22 +1,9 @@
 ---
 title: 'Button'
 description: 'A button component that can be used to trigger an action'
+dependencies: ['@radix-ui/react-slot']
+registryDependencies: ["spinner"]
 ---
-
-## Installation
-<Steps>
-  <Step>
-    ### Install the following dependencies
-    ```bash
-    bun add @shadcn/ui
-    ```
-  </Step>
-  <Step>Install the [spinner](/experiments/ui/components/spinner) component</Step>
-  <Step>
-  ### Paste the following code into your project
-  <ComponentCode componentId="button" />
-  </Step>
-</Steps>
 
 ## Additions
 The button component is based off of the [shadcn/ui component](https://ui.shadcn.com/docs/components/button) by the same name, but with a few notable additions. The button component sports two new props: loading, and icon. The loading prop is a boolean that, when true, will disable the button and display a loading spinner in place of an icon. The icon prop takes a React component. The icon will be displayed to the left of the button children. Although you could pass an icon in the children, this would now allow for the icon to be hidden while the button is in the loading state. There is also no need to add margin to the icon, as it will be added automatically.

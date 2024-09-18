@@ -37,6 +37,12 @@ export const UI = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     description: { type: "string", required: true },
+    dependencies: { type: "list", of: { type: "string" }, required: false },
+    registryDependencies: {
+      type: "list",
+      of: { type: "string" },
+      required: false,
+    },
     colSpan: { type: "number", required: false },
     rowSpan: { type: "number", required: false },
   },
@@ -74,7 +80,7 @@ export const UI = defineDocumentType(() => ({
     },
     url: {
       type: "string",
-      resolve: (post) => `/${post._raw.flattenedPath}`,
+      resolve: (component) => `/${component._raw.flattenedPath}`,
     },
   },
 }));
