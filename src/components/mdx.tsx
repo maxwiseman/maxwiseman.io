@@ -15,6 +15,7 @@ import { ClipboardButton } from "./clipboard-button";
 import { Step, Steps } from "./ui/steps";
 import { ComponentCode } from "@/app/experiments/ui/component-code";
 import { SiteScreenshot } from "./site-screenshot";
+import Link from "next/link";
 
 const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -75,15 +76,28 @@ const mdxComponents = {
     className,
     ...props
   }: React.HTMLAttributes<HTMLAnchorElement> & { href?: string }) => (
-    <LinkPreview
-      className={cn(
-        "font-medium underline decoration-muted-foreground/50 underline-offset-4 transition-colors duration-300 hover:decoration-foreground",
-        className,
+    <>
+      {props.href?.startsWith("http") ? (
+        <LinkPreview
+          className={cn(
+            "font-medium underline decoration-muted-foreground/50 underline-offset-4 transition-colors duration-300 hover:decoration-foreground",
+            className,
+          )}
+          href={"#"}
+          target={"_blank"}
+          {...props}
+        />
+      ) : (
+        <Link
+          className={cn(
+            "font-medium underline decoration-muted-foreground/50 underline-offset-4 transition-colors duration-300 hover:decoration-foreground",
+            className,
+          )}
+          href={"#"}
+          {...props}
+        />
       )}
-      href={"#"}
-      target={props.href?.startsWith("http") ? "_blank" : undefined}
-      {...props}
-    />
+    </>
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p

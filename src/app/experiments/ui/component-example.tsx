@@ -1,7 +1,7 @@
 import { ClipboardButton } from "@/components/clipboard-button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
+import { cn, siteURL } from "@/lib/utils";
 import { type TabsProps } from "@radix-ui/react-tabs";
 import { promises as fs } from "fs";
 import Link from "next/link";
@@ -107,13 +107,14 @@ export async function MiniExample({
   title?: string;
   descrption?: string;
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) {
-  const componentCode = await fs.readFile(
-    path.join(
-      process.cwd(),
-      `src/content/experiments/ui/${componentId}/example.tsx`,
-    ),
-    "utf-8",
-  );
+  // const componentCode = await fs.readFile(
+  //   path.join(
+  //     process.cwd(),
+  //     `src/content/experiments/ui/${componentId}/example.tsx`,
+  //   ),
+  //   "utf-8",
+  // );
+  const componentCommand = `bunx shadcn@latest add ${siteURL}/experiments/ui/${componentId}/json`;
   const miniExampleExists = await fs
     .readdir(
       path.join(process.cwd(), "src/content/experiments/ui", componentId),
@@ -132,7 +133,7 @@ export async function MiniExample({
           {children}
           <ClipboardButton
             className="absolute right-0 top-0 m-2 h-6 w-6 [&>div>svg]:!h-3 [&>div>svg]:!w-3"
-            text={componentCode}
+            text={componentCommand}
             variant={"secondary"}
           />
         </Card>
