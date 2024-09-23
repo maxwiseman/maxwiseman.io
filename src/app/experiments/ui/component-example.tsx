@@ -9,6 +9,7 @@ import path from "path";
 import { type DetailedHTMLProps, type HTMLAttributes } from "react";
 import { codeToHtml } from "shiki";
 import { getComponentExample } from "./get-component";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 
 export async function ComponentExample({
   children,
@@ -30,16 +31,19 @@ export async function ComponentExample({
 
   const Component = await getComponentExample(componentId, exampleId);
 
-  let exampleTitle = "";
-  if (exampleId) {
-    exampleTitle = await import(
-      `@/content/experiments/ui/${componentId}/${exampleId}.tsx`
-    ).then((mod: { exampleTitle: string }) => mod.exampleTitle);
-  }
+  const exampleTitle = exampleId
+    ?.split("-")
+    .map((word) => word[0]?.toUpperCase() + word.slice(1))
+    .join(" ");
+  // if (exampleId) {
+  //   exampleTitle = await import(
+  //     `@/content/experiments/ui/${componentId}/${exampleId}.tsx`
+  //   ).then((mod: { exampleTitle: string }) => mod.exampleTitle);
+  // }
 
   return (
     <>
-      {exampleTitle !== "" && (
+      {exampleTitle && (
         <h3
           id={exampleTitle.replaceAll(" ", "-").toLowerCase()}
           className="mb-4 mt-8 scroll-m-20 text-2xl font-semibold tracking-tight"
@@ -57,10 +61,12 @@ export async function ComponentExample({
           <TabsTrigger value="code">Code</TabsTrigger>
         </TabsList>
         <TabsContent value="preview">
-          <Card className="flex h-96 w-full grow items-center justify-center overflow-hidden p-8">
-            {Component && <Component />}
-            {children}
-          </Card>
+          <ErrorBoundary className="h-96">
+            <Card className="flex h-96 w-full grow items-center justify-center overflow-hidden p-8">
+              {Component && <Component />}
+              {children}
+            </Card>
+          </ErrorBoundary>
         </TabsContent>
         <TabsContent value="code">
           <Card className="relative h-96 w-full text-sm">
@@ -120,15 +126,17 @@ export async function MiniExample({
 
   return (
     <div className={cn("flex flex-col gap-2", className)} {...props}>
-      <Card className="relative flex h-48 grow items-center justify-center overflow-hidden p-8">
-        {Component && <Component />}
-        {children}
-        <ClipboardButton
-          className="absolute right-0 top-0 m-2 h-6 w-6 [&>div>svg]:!h-3 [&>div>svg]:!w-3"
-          text={componentCode}
-          variant={"secondary"}
-        />
-      </Card>
+      <ErrorBoundary>
+        <Card className="relative flex h-48 grow items-center justify-center overflow-hidden p-8">
+          {Component && <Component />}
+          {children}
+          <ClipboardButton
+            className="absolute right-0 top-0 m-2 h-6 w-6 [&>div>svg]:!h-3 [&>div>svg]:!w-3"
+            text={componentCode}
+            variant={"secondary"}
+          />
+        </Card>
+      </ErrorBoundary>
       {title ?? descrption ? (
         <Link className="h-[4.75rem]" href={href ?? ""}>
           {title && <h6 className="line-clamp-1 text-lg font-bold">{title}</h6>}
