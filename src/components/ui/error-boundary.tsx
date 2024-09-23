@@ -27,7 +27,7 @@ export function ErrorComponent({
   reset: () => void;
 }) {
   return (
-    <Card className="h-full w-full border-red-400 bg-red-50 text-red-500 dark:border-red-900/50 dark:bg-red-800/10 dark:text-red-600">
+    <Card className="h-full w-full border-red-400 bg-red-50 text-red-500 dark:border-red-600/40 dark:bg-red-800/20 dark:text-red-600">
       <CardHeader className="pb-2">
         <h1 className="flex items-center gap-3 text-2xl font-bold">
           <IconAlertTriangleFilled />

@@ -1,0 +1,29 @@
+---
+title: "Quotes V2"
+repo: "maxwiseman/quotes"
+link: "https://quotes.maxwiseman.io"
+tech: ["react", "next", "turso", "vercel", "shadcn", "cloudflare"]
+---
+
+I am a big fan of the BBC TV show, [Top Gear](https://www.bbc.co.uk/programmes/b006mj59). Top Gear is a long running show focused on all things cars. It's three hilarious presenters, Jeremey Clarkson, James May, and Richard Hammond, have made the show an icon. Their witty comments, running gags, and sometimes dark humor hits the nail on the head. My problem though, was that, being an older, less popular show, there aren't many clips of these wonderful moments on YouTube or the like. This makes it difficult to find clips of quotes. My previous project added little to this subject. It was mostly a redesign of the existing [officequotes.net](https://officequotes.net) website, with some additional sharing features. This, however, is entirely different. Officequotes.net has (or, at least, had) a team of contributors who transcribed the entire show line-by-line. I don't have that luxury. What I do have, are all of the episodes in MKV format. Notably, this includes subtitles. The idea was this: create a website that repurposes the subtitle data to use as quotes, then, using the timecodes from each quote, generate clips on the fly of each quote at request time. That's exactly what I did.
+
+## Development
+
+### Database Seeding
+
+First, I wrote a simple script (I called it the "DB Generator") to seed the database with all of my subtitle data. I use [FFmpeg](https://www.ffmpeg.org) to convert the MKV files to SRTs, then, use an SRT parsing library to convert that to JSON. This might not be the most efficient way, but for seeding a database, efficiency doesn't really matter. Then, I simply upload that JSON to my [Turso](https://turso.tech) SQLite database using [Drizzle ORM](https://orm.drizzle.team). Easy.
+
+### Dynamic Video Trimming
+
+Next, the hard part, trimming the clips. For this, I decided to write an API in [Go](https://go.dev). I figured the main advantage of using TS is that it can run on edge or serverless infrastructure, but for this, since it will need to store hundreds of gigabytes of videos along with it, a dedicated server would be neccesary anyway. I used Gin to write the API logic, and then use FFmpeg again to cut and serve the clips. Another unexpected advantage of using Gin and Go is that I can actually serve the video as if it is static content. To use it on my frontend, all I'd have to do is just use a video tag with the source prop set accordingly.
+```tsx
+<video src="https://backend.placeholder.link?quoteId=123" />
+```
+This avoids the more traditional system of requesting that a video be trimmed, trimming it, uploading the clip to an S3 bucket, and then requesting that on the client side. During this process, I also transcode the video to an mp4 so that it can be played back natively in the browser. FFmpeg, luckily, is fast enough to do this when a clip is requested. It is then stored temporarily in a cache because most browsers will make multiple requests for the same video to retrieve different chunks.
+
+### Database Challenges
+
+There was, however, one problem. The database I chose to use was Turso's hosted SQLite DB. I chose this for one reason: cost. Frankly, I want to stay on the free tier for as long as possible, and with Planetscale out of the running, Turso was simply the best option. I used Drizzle on the frontend to setup a schema, but that was in TS. This is in Go. So somehow, I need to be able to access the database from my Go script, and ideally, I'd like to avoid having multiple different schema declarations, as they could become out of sync if changes are only made to one. Instead of raw dogging SQL or using a Go ORM, I decided to just do my database calls in TS. My backend Go script needs to know the location of the video to pull, and the timecodes to trim it to. It then serves that trimmed video back on the same URL. On the frontend, I have quote timecodes associated with a unique ID, and the episode (including the file location of the episode). Therefor, I implemented some NextJS middleware that redirects requests with a quote ID to the neccesary Go endpoint with the proper parameters from the database. This is blazingly fast, and actually has some security advantages. First of all, I never expose my actual backend endpoint as it is a rewrite, so the URL the browser sees never changes, all redirects go through the server. Secondly, I implemented a simple secret such that only the server, who knows the secret (set by an environment variable) can make any sort of request to the backend. Lastly, by going through NextJS middleware, my self-hosted Go backend could benefit from additional protections afforded by the [Vercel Firewall](https://vercel.com/docs/security/vercel-firewall) (that way if my [Cloudflare](https://cloudflare.com) protections [suddenly get too expensive](https://robindev.substack.com/p/cloudflare-took-down-our-website), I should be fine).
+
+## Result
+After putting together a mostly coherent frontend, the result exceeded my expectations.
