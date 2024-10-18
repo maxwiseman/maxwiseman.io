@@ -11,6 +11,7 @@ import "@/styles/globals.css";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Max Wiseman",
@@ -34,6 +35,7 @@ export default function RootLayout({
         >
           <TooltipProvider>
             {children}
+            <Analytics />
             <footer className="flex items-center justify-center p-8 text-muted-foreground">
               <div className="flex w-full max-w-prose items-center justify-between">
                 <div>
