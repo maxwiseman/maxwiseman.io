@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { HTMLProps } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import Link from "next/link";
@@ -40,7 +41,7 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
-  icon?: React.ReactElement;
+  icon?: React.ReactElement<HTMLProps<HTMLDivElement>>;
 }
 
 export interface LinkButtonProps
@@ -48,7 +49,7 @@ export interface LinkButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
-  icon?: React.ReactElement;
+  icon?: React.ReactElement<HTMLProps<HTMLDivElement>>;
   href: string;
   target?: string;
 }
@@ -62,7 +63,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             !props.loading ? "mr-2 w-4" : "mr-0 w-0",
             { "mr-0": size === "icon" },
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
-            props.icon.props?.className as string | undefined,
+            props.icon.props?.className,
           ),
         })
       : null;
@@ -113,7 +114,7 @@ const LinkButton = React.forwardRef<HTMLButtonElement, LinkButtonProps>(
             "h-4 w-4 mr-2",
             { "mr-0": size === "icon" },
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
-            props.icon.props?.className as string | undefined,
+            props.icon.props?.className,
           ),
         })
       : null;
